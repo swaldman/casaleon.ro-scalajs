@@ -1,0 +1,131 @@
+body {
+    color: black;
+    background: white;
+
+/*
+    background-image: url('/assets/images/casa_leon_logo_500.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center bottom;
+*/
+
+    margin: 0;
+    padding: 0;
+}
+
+div.main {
+    position: relative;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+
+    border: 3px solid black;
+    margin-bottom: 2em;
+    font-family: 'Gentium Book Basic', serif;
+
+    background-color: rgba(255,255,255,0.8);
+
+    overflow: scroll;
+}
+
+div.topsect {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
+div.bottomsect {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    z-index: -1;
+}
+
+#cl_champagne {
+    text-align: center;
+}
+
+#cl_logo {
+    text-align: center;
+}
+
+div#main_menu {
+    font-size: 18pt;
+    text-align: center;
+    font-weight: bold;
+}
+
+div#main_menu a {
+    padding-left: 1em;
+    padding-right: 1em;
+    border-top: 2px solid black;
+    text-decoration: none;
+    color: #CCCCCC;
+}
+
+div#main_menu a:hover {
+    color: #EECCBB;
+}
+
+div#main_menu a.black {
+    color: black;
+}
+
+div#homeContent {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 30px;
+    text-align: left;
+    font-size: 18pt;
+    line-height: 150%;
+}
+
+div#homeContent a {
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+div#langSelector {
+    margin-right: 15px;
+    margin-top: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+a.activeLangCode {
+    color: black;
+    font-weight: bold;
+}
+
+a.newLangCode {
+    color: #CCCCCC;
+    text-decoration: none;
+}
+
+a.newLangCode:hover {
+    color: #EECCBB;
+}
+
+img#circleWindow {
+    float: left;
+    /* shape-outside: url("/assets/images/cl_front_exterior_extra_sm_circular_window.png"); */
+    /* -webkit-shape-outside: url("/assets/images/cl_front_exterior_extra_sm_circular_window.png"); */
+    shape-outside: border-box circle(50%);
+}
+
