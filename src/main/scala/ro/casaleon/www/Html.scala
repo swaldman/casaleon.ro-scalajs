@@ -7,10 +7,15 @@ import org.scalajs.dom;
 
 object Html {
   def mainFrame( model : Model ) : TypedTag[dom.Element] = {
-    div( cls := "main" )( 
+    div( id := "main" )(
+      div( id := "stretcher" )(
+        div( id := "bottomsect" )(
+          i( raw("Strada Mircea cel Batr&#226;n nr. 43 &rightsquigarrow; Constan&#x163;a 900658 &rightsquigarrow; Romania") )
+        )
+      ),
       maybeVacationRentalsStar( model ),
       langSelector( model ),
-      div( cls := "topsect" )(
+      div( id := "topsect" )(
         div( id := "cl_champagne" )(
           img( src := "images/CasaLeonChampagne_800.png" )
         ),
@@ -20,7 +25,7 @@ object Html {
             a( cls := cssClass, onclick := s"ro.casaleon.www.App().updatePageName( '${page.name}' )" )( I18n.menuItemName( page, model.lang ) )
           }
         ),
-        div( id := "content" ) (
+        div( id := "content" )(
           content( model )
         )
       )
