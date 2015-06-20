@@ -10,7 +10,7 @@ object Html {
     div( id := "main" )(
       div( id := "stretcher" )(
         div( id := "bottomsect" )(
-          i( raw("Strada Mircea cel Batr&#226;n nr. 43 &rightsquigarrow; Constan&#x163;a 900658 &rightsquigarrow; Romania") )
+          i( raw("Str. Mircea cel Batr&#226;n nr. 43 &rightsquigarrow; Constan&#x163;a 900658 &rightsquigarrow; Romania") )
         )
       ),
       maybeVacationRentalsStar( model ),
@@ -79,9 +79,9 @@ object Html {
       )
     }
 
-    def spaces = p( b( "Spaces: To come" ) )
-    def gallery = p( b( "Gallery: To come" ) )
-    def contact = p( b( "Contact: To come" ) )
+    def spaces = div( id := "placeholder" )( p( b( "Spaces: To come" ) ) )
+    def gallery = div( id := "placeholder" )( p( b( "Gallery: To come" ) ) )
+    def contact = div( id := "placeholder" )( p( b( "Contact: To come" ) ) )
 
     model.page match {
       case Page.Home    => home
@@ -110,29 +110,5 @@ object Html {
     }
 
     div( id := "langSelector" )( langs )
-  }
-
-  def testPage : TypedTag[dom.Element] = {
-    html(
-      head(
-        script("some script")
-      ),
-      body(
-        h1("This is my title"),
-        div(
-          p("This is my first paragraph"),
-          p("This is my second paragraph")
-        )
-      )
-    ) 
-  }
-  def testBody : TypedTag[dom.Element] = {
-    div(
-      h1("This is my title"),
-      div(
-        p("This is my 1st paragraph."),
-        p("This is my 2nd paragraph.")
-      )
-    )
   }
 }
