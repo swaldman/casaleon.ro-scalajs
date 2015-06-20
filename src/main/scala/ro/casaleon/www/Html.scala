@@ -8,6 +8,7 @@ import org.scalajs.dom;
 object Html {
   def mainFrame( model : Model ) : TypedTag[dom.Element] = {
     div( cls := "main" )( 
+      maybeVacationRentalsStar( model ),
       langSelector( model ),
       div( cls := "topsect" )(
         div( id := "cl_champagne" )(
@@ -26,33 +27,42 @@ object Html {
     )
   }
 
+  def maybeVacationRentalsStar( model : Model ) : TypedTag[dom.Element] = {
+    if ( model.page == Page.Home ) {
+      div( id := "vacationRentalsStar" )(
+        a( href := "https://www.airbnb.com/rooms/6231211", target := "_blank" )(
+          img( src := "images/vacation-rentals.png", width := "75%" )
+        )
+      )
+    } else {
+      script( `type` := "text/plain" )(
+        "Omitted vacationRentalsStar"
+      )
+    }
+  }
+
   def content( model : Model ) : TypedTag[dom.Element] = {
     def home = {
-      div( id := "homeContent" )(
-        img( id := "circleWindow", src := "images/cl_front_exterior_extra_sm_circular_window.png" ),
-        p( raw("&nbsp;"), a( href := "http://en.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), "." ),
-        p( 
-          raw("&nbsp;"),
-          "Commercial space, office space, and ", 
+      div( id := "home" ) (
+        div( id := "circleWindowFrame" )(
+          img( id := "circleWindow", src := "images/cl_front_exterior_extra_sm_circular_window.png" )
+        ),
+        div( id := "homeContent" )(
+          a( href := "http://en.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), ". ",
+          "Commercial space, office space, and ",
           a( href := "https://www.airbnb.com/rooms/6231211", target := "_blank" )(
             "a fine vacation studio"
           ),
-          "."
-        ),
-        p( 
-          raw("&nbsp;"),
+          ". ",
           "An address with distinction, and a ",
           a( href := "http://www.nytimes.com/2001/02/15/garden/romanian-past-interrupted.html?pagewanted=all&src=pm", target := "_blank" )(
-            "history "
+            "history"
           ),
-          "."
-        ),
-        p( raw("&nbsp;"), "Stunning views of the sea, from your desk or from your balcony." ),
-        p( raw("&nbsp;"), "Entertain guests on the building's panaoramic roof terraces." ),
-        p(
-          raw("&nbsp;"),
+          ". ",
+          "Stunning views of the sea, from your desk or from your balcony. ",
+          "Entertain guests on the building's panaoramic roof terraces. ",
           "In the ",
-          a( href := "https://www.google.com/maps/d/edit?mid=z2cJSCR_sDxc.kELqRSVJCGqo&usp=sharing", target := "_blank" )(
+          a( href := "https://plus.google.com/101225362883468431775/about?gl=us&hl=en", target := "_blank" )(
             "heart of the city "
           ),
           raw("next to Constan&#x163;a's "),
