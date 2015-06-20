@@ -28,7 +28,7 @@ div#main {
 
     /* margin-bottom: 2em; */
 
-    /* overflow: scroll; */
+    overflow: scroll;
 }
 
 div#topsect {
@@ -202,4 +202,30 @@ div#content {
 div#placeholder {
     font-size: 18pt;
     text-align: center;
+}
+
+div#galleryPane {
+    margin-top:   20px;
+    margin-left:  50px;
+    margin-right: 50px;
+
+    border: 7px solid #CCCCCC; /* #FFCCDD; */
+    border-radius: 7px;
+
+    overflow: scroll;
+}
+
+a.galleryLink img {
+    border: 1px solid #CCCCCC; /* #ca99a5; */ /* #FFCCDD; */
+}
+
+/*
+a.galleryLink:hover img {
+    border: 1px solid white;
+}
+*/
+
+div.galleryTable {
+    overflow: scroll;
+    white-space: nowrap;
 }

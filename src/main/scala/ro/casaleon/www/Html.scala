@@ -80,7 +80,7 @@ object Html {
     }
 
     def spaces = div( id := "placeholder" )( p( b( "Spaces: To come" ) ) )
-    def gallery = div( id := "placeholder" )( p( b( "Gallery: To come" ) ) )
+    def gallery = ro.casaleon.www.gallery.Html.galleryPane //div( id := "placeholder" )( p( b( "Gallery: To come" ) ) )
     def contact = div( id := "placeholder" )( p( b( "Contact: To come" ) ) )
 
     model.page match {

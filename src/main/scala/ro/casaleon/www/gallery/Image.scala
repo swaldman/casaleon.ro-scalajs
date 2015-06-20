@@ -13,6 +13,10 @@ object Image {
     "IMG_5102.JPG"
   )
 
+  def Urls = Names.map( BaseUrl + _ )
+
   val BaseUrl = "http://tickle.mchange.com/ssim/casaleon/"
+
+  val count = Names.length;
 
 }
