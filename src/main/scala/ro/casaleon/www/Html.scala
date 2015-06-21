@@ -33,10 +33,17 @@ object Html {
   }
 
   def maybeVacationRentalsStar( model : Model ) : TypedTag[dom.Element] = {
+    import I18n.Lang._
+
+    val imgUrl = model.lang match {
+      case EN => "images/vacation-rentals.png"
+      case RO => "images/apartament-de-vacanta.png"
+      case _  => "images/vacation-rentals.png"
+    }
     if ( model.page == Page.Home ) {
       div( id := "vacationRentalsStar" )(
         a( href := "https://www.airbnb.com/rooms/6231211", target := "_blank" )(
-          img( src := "images/vacation-rentals.png", width := "75%" )
+          img( src := imgUrl, width := "75%" )
         )
       )
     } else {
