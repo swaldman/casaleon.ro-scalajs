@@ -204,6 +204,32 @@ div#placeholder {
     text-align: center;
 }
 
+.textcard {
+    font-size:    18pt;
+    text-align:   justify;
+
+    margin-top:   50px;
+    margin-left:  15%;
+    margin-right: 15%;
+
+    line-height: 200%;
+
+    background-image: URL('images/casa_leon_logo_500_lighter.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.booknow {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 24pt;
+    color: black;
+}
+
+.booknow:hover {
+    text-decoration: underline;
+}
+
 div#galleryTableFrame {
     margin-top:   20px;
     margin-left:  50px;

@@ -6,6 +6,8 @@ import scalatags.JsDom.TypedTag;
 import org.scalajs.dom;
 
 object Html {
+  val AirBnBUrl = "https://www.airbnb.com/rooms/6231211"
+
   def mainFrame( model : Model ) : TypedTag[dom.Element] = {
     div( id := "main" )(
       div( id := "stretcher" )(
@@ -42,7 +44,7 @@ object Html {
     }
     if ( model.page == Page.Home ) {
       div( id := "vacationRentalsStar" )(
-        a( href := "https://www.airbnb.com/rooms/6231211", target := "_blank" )(
+        a( href := AirBnBUrl, target := "_blank" )(
           img( src := imgUrl, width := "75%" )
         )
       )
@@ -62,7 +64,7 @@ object Html {
         div( id := "homeContent" )(
           a( href := "http://en.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), ". ",
           "Commercial space, office space, and ",
-          a( href := "https://www.airbnb.com/rooms/6231211", target := "_blank" )(
+          a( href := AirBnBUrl, target := "_blank" )(
             "a fine vacation studio"
           ),
           ". ",
@@ -86,8 +88,25 @@ object Html {
       )
     }
 
-    def spaces = div( id := "placeholder" )( p( b( "Spaces: To come" ) ) )
-    def gallery = ro.casaleon.www.gallery.Html.galleryPane //div( id := "placeholder" )( p( b( "Gallery: To come" ) ) )
+    def spaces = { //div( id := "placeholder" )( p( b( "Spaces: To come" ) ) )
+      div( cls := "textcard" )(
+        p(
+          "Our third floor vacation studio, adjacent to a stunning rooftop terrace ",
+          "is now available via AirBnB."
+        ),
+        p( cls := "center" )(
+          a( href := AirBnBUrl, cls := "booknow", target := "_blank" )(
+            "Book now!"
+          )
+        ),
+        p( 
+          "Unfortunately, our commercial and office spaces are fully booked at the moment. ",
+          "Thank you for your interest, and keep us in mind in the future!" 
+        )
+      )
+    }
+
+    def gallery = ro.casaleon.www.gallery.Html.galleryPane 
     def contact = div( id := "placeholder" )( p( b( "Contact: To come" ) ) )
 
     model.page match {
