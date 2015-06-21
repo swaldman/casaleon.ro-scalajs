@@ -28,7 +28,7 @@ scalaVersion := "2.11.6"
 
 libraryDependencies ++= Seq(
   "com.lihaoyi" %%% "scalatags" % "0.5.2",
-  "org.scala-js" %%% "scalajs-dom" % "0.8.0"
+  "org.scala-js" %%% "scalajs-dom" % "0.8.1"
 )
 
 jsFileNameToken := "@jsFileName@"

@@ -18,5 +18,4 @@ object Image {
   val BaseUrl = "http://tickle.mchange.com/ssim/casaleon/"
 
   val count = Names.length;
-
 }

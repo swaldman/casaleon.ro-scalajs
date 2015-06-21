@@ -204,7 +204,7 @@ div#placeholder {
     text-align: center;
 }
 
-div#galleryPane {
+div#galleryTableFrame {
     margin-top:   20px;
     margin-left:  50px;
     margin-right: 50px;
@@ -228,4 +228,28 @@ a.galleryLink:hover img {
 div.galleryTable {
     overflow: scroll;
     white-space: nowrap;
+}
+
+div#imageViewer {
+    position: absolute;
+
+    top:    0px;
+    left:   0px;
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+
+    text-align: center;
+}
+div#imageViewerHeader {
+    background-color: black;
+}
+div#imageViewerPanel {
+    background-color: #444444;
+}
+a#imageViewerPanelClose {
+    position: absolute;
+    top:  0px;
+    left: calc(100% - 35px);
 }

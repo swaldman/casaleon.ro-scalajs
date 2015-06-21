@@ -14,13 +14,9 @@ object App extends JSApp {
 
   private var model = new Model( Page.Home, Lang.EN );
 
-  private def clearChildren( node : Node ) : Unit = {
-    val kids = node.childNodes
-    (0 until kids.length).foreach( i => node.removeChild( kids(i) ) )
-  }
   def rerender = {
     val body = dom.document.body;
-    clearChildren( body );
+    DomUtils.clearChildren( body );
     body.appendChild( Html.mainFrame( model ).render )
   }
 
