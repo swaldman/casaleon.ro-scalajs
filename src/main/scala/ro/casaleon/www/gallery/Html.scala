@@ -39,6 +39,11 @@ object Html {
 
     val fullWidth : Boolean = imageAspectRatio > viewerPanelAspectRatio;
 
+    val urlIndex = Image.Urls.indexOf( url )
+
+    val mbPrevUrl : Option[String] = if ( urlIndex > 0 ) Some( Image.Urls(urlIndex - 1) ) else None;
+    val mbNextUrl : Option[String] = if ( urlIndex >= 0 && urlIndex < Image.Urls.size - 1 ) Some( Image.Urls( urlIndex + 1 ) ) else None;
+
     div ( id := "imageViewer", width := dim.width, height := dim.height ){
       val sizing = if (fullWidth) (width := dim.width) else (height := availableHeight);
       Seq(

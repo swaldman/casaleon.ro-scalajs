@@ -20,6 +20,9 @@ object Gallery {
   def showViewer( elem : Element, url : String ) : Unit = {
     val clientRect = elem.getBoundingClientRect
     val aspectRatio = clientRect.width / clientRect.height
+    showViewer( aspectRatio, url );
+  }
+  def showViewer( aspectRatio : Double, url : String ) : Unit = {
     this.model = Model( Some( ImageUrlInfo( url, aspectRatio ) ) )
     rerender
   }
