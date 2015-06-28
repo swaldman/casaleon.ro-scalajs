@@ -23,7 +23,11 @@ object Gallery {
     showViewer( aspectRatio, url );
   }
   def showViewer( aspectRatio : Double, url : String ) : Unit = {
-    this.model = Model( Some( ImageUrlInfo( url, aspectRatio ) ) )
+    this.model = Model( Some( ImageUrlInfo( url, Some(aspectRatio) ) ) )
+    rerender
+  }
+  def showViewer( url : String ) : Unit = {
+    this.model = Model( Some( ImageUrlInfo( url, None ) ) )
     rerender
   }
   def closeViewer : Unit = {

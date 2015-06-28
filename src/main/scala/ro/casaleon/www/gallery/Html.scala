@@ -25,12 +25,14 @@ object Html {
 
   def galleryContents( model : Model ) : TypedTag[dom.Element] = {
     model.selectedImageUrlInfo match {
-      case Some( ImageUrlInfo( url, aspectRatio ) ) => imageViewer( url, aspectRatio )
-      case None                                     => galleryTableFrame
+      case Some( ImageUrlInfo( url, mbAspectRatio ) ) => imageViewer( url, mbAspectRatio )
+      case None                                       => galleryTableFrame
     }
   }
 
-  def imageViewer( url : String, imageAspectRatio : Double ) : TypedTag[dom.Element] = {
+  def imageViewer( url : String, mbImageAspectRatio : Option[Double] ) : TypedTag[dom.Element] = {
+
+    val imageAspectRatio = mbImageAspectRatio.getOrElse(1d);
 
     val dim = Gallery.imageViewerDimension;
 
@@ -44,6 +46,10 @@ object Html {
     val mbPrevUrl : Option[String] = if ( urlIndex > 0 ) Some( Image.Urls(urlIndex - 1) ) else None;
     val mbNextUrl : Option[String] = if ( urlIndex >= 0 && urlIndex < Image.Urls.size - 1 ) Some( Image.Urls( urlIndex + 1 ) ) else None;
 
+    // preloads
+    mbPrevUrl.foreach( u => img( src := u ).render );
+    mbNextUrl.foreach( u => img( src := u ).render );
+
     div ( id := "imageViewer", width := dim.width, height := dim.height ){
       val sizing = if (fullWidth) (width := dim.width) else (height := availableHeight);
       Seq(
@@ -53,8 +59,26 @@ object Html {
           ),
           img( src := ImageViewerHeaderImage )
         ),
-        div( id := "imageViewerPanel" ) (
-          img( sizing, src := url )
+        div( id := "imageViewerPanel" )(
+          div( id := "previousImageLink" )( 
+            mbPrevUrl.fold( a() )( prevUrl => a( onclick := ((_ : dom.Event) => Gallery.showViewer( prevUrl )) )( raw("&#8604;") ) )
+          ),
+          if ( mbImageAspectRatio != None ) { // this is the final aspect ratio
+            img( sizing, src := url )
+          } else {
+            val onLoadFcn = (evt : dom.Event) => { // check to see whether our aspect raio guess led to okay sizing
+              val imgTag = evt.target.asInstanceOf[dom.raw.HTMLImageElement]
+              val realAspectRatio = imgTag.naturalWidth.toDouble / imgTag.naturalHeight;
+              if ( (realAspectRatio > viewerPanelAspectRatio) != fullWidth ) { // we guessed a bad relative aspect ratio
+                Gallery.showViewer( realAspectRatio, url )
+              }
+            }
+            val onLoadAttr = onload := onLoadFcn
+            img( sizing, src := url, onLoadAttr )
+          },
+          div( id := "nextImageLink" )(
+            mbNextUrl.fold( a() )( nextUrl => a( onclick := ((_ : dom.Event) => Gallery.showViewer( nextUrl )) )( raw("&rightsquigarrow;") ) )
+          )
         )
       )
     }

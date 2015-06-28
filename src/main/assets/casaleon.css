@@ -279,3 +279,23 @@ a#imageViewerPanelClose {
     top:  0px;
     left: calc(100% - 35px);
 }
+div#previousImageLink, div#nextImageLink {
+    color:      white;
+    font-size:  36pt;
+    padding-top: 25%;
+    z-index:     5;
+    /* border: 3px solid green; */
+}
+div#previousImageLink a:hover, div#nextImageLink a:hover {
+    color: cyan;
+}
+
+div#previousImageLink {
+    float:       left;
+    margin-left: 10px;
+}
+div#nextImageLink {
+    float:        right;
+    margin-right: 10px;
+}
+
