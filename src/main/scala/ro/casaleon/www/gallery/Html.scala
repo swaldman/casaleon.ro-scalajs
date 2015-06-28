@@ -47,8 +47,9 @@ object Html {
     val mbNextUrl : Option[String] = if ( urlIndex >= 0 && urlIndex < Image.Urls.size - 1 ) Some( Image.Urls( urlIndex + 1 ) ) else None;
 
     // preloads
-    mbPrevUrl.foreach( u => img( src := u ).render );
-    mbNextUrl.foreach( u => img( src := u ).render );
+    val preloads = div( display := "none" )(
+      mbPrevUrl.map( u => img( src := u, display := "none" ) ).toSeq ++ mbNextUrl.map( u => img( src := u, display := "none" ) ).toSeq
+    );
 
     div ( id := "imageViewer", width := dim.width, height := dim.height ){
       val sizing = if (fullWidth) (width := dim.width) else (height := availableHeight);
@@ -78,7 +79,8 @@ object Html {
           },
           div( id := "nextImageLink" )(
             mbNextUrl.fold( a() )( nextUrl => a( onclick := ((_ : dom.Event) => Gallery.showViewer( nextUrl )) )( raw("&rightsquigarrow;") ) )
-          )
+          ),
+          preloads // does not display
         )
       )
     }
