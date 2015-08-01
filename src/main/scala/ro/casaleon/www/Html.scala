@@ -119,7 +119,6 @@ object Html {
         )
       )
     }
-
     def spaces = { 
       import I18n.Lang.RO
 
