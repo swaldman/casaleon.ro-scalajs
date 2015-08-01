@@ -20,11 +20,11 @@ object I18n {
       case ( Home,    EN ) => "home"
       case ( Home,    RO ) => "acasa"
       case ( Spaces,  EN ) => "spaces"
-      case ( Spaces,  RO ) => "locuri"
+      case ( Spaces,  RO ) => "spa&tcedil;ii"
       case ( Gallery, EN ) => "gallery"
-      case ( Gallery, RO ) => "imagini"
+      case ( Gallery, RO ) => "gallerie"
       case ( Contact, EN ) => "contact"
-      case ( Contact, RO ) => "contacte"
+      case ( Contact, RO ) => "contact"
     }
   }
 
