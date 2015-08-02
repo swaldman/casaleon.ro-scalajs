@@ -56,56 +56,57 @@ object Html {
   }
 
   def content( model : Model ) : TypedTag[dom.Element] = {
-    def enContent = Seq[ scalatags.JsDom.Modifier ](
-      a( href := "http://en.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), ". ",
-      "Commercial space, office space, and ",
-      a( href := AirBnBUrl, target := "_blank" )(
-        "a fine vacation studio"
-      ),
-      ". ",
-      "An address with distinction, and a ",
-      a( href := "http://www.nytimes.com/2001/02/15/garden/romanian-past-interrupted.html?pagewanted=all&src=pm", target := "_blank" )(
-        "history"
-      ),
-      ". ",
-      "Stunning views of the sea, from your desk or from your balcony. ",
-      "Entertain guests on the building's panaoramic roof terraces. ",
-      "In the ",
-      a( href := "https://plus.google.com/101225362883468431775/about?gl=us&hl=en", target := "_blank" )(
-        "heart of the city "
-      ),
-      raw("next to Constan&#x163;a's "),
-      a( href := "http://www.ibis.com/gb/hotel-5939-ibis-constanta/index.shtml", target := "_blank" )(
-        "main business hotel"
-      ),
-      "."
-    );
-    def roContent = Seq[ scalatags.JsDom.Modifier ](
-      a( href := "http://ro.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), ". ",
-      raw("Spa&tcedil;ii comerciale, spa&tcedil;ii pentru birouri, &scedil;i " ),
-      a( href := AirBnBUrl, target := "_blank" )(
-        raw( "un calderos Studio pentru vacan&tcedil;a" )
-      ),
-      ". ",
-      raw( "O loca&tcedil;ie cu distinc&tcedil;ie, incarcata de "),
-      a( href := "http://www.nytimes.com/2001/02/15/garden/romanian-past-interrupted.html?pagewanted=all&src=pm", target := "_blank" )(
-        "istorie "
-      ),
-      a( href := "https://plus.google.com/101225362883468431775/about?gl=us&hl=en", target := "_blank" )(
-        raw( "in inima ora&scedil;ului" )
-      ),
-      raw( ", langa " ),
-      a( href := "http://www.ibis.com/gb/hotel-5939-ibis-constanta/index.shtml", target := "_blank" )(
-        "cel mai important business hotel din zona. "
-      ),
-      raw(
-        "Cu o privile&scedil;te uimitoare la Marea Neagra din orice birou sau balcon &scedil;i unde va pute&tcedil;i primi " +
-        "oaspe&tcedil;ii pe imensa terasa de la ultimul nivel de unde se poate admira cea mai cunoscuta plaja a ora&scedil;ului " +
-        "dar &scedil;i portul turistic Tomis."
-      )
-    );
     def home = {
       import I18n.Lang.RO
+
+      def enContent = Seq[ scalatags.JsDom.Modifier ](
+        a( href := "http://en.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), ". ",
+        "Commercial space, office space, and ",
+        a( href := AirBnBUrl, target := "_blank" )(
+          "a fine vacation studio"
+        ),
+        ". ",
+        "An address with distinction, and a ",
+        a( href := "http://www.nytimes.com/2001/02/15/garden/romanian-past-interrupted.html?pagewanted=all&src=pm", target := "_blank" )(
+          "history"
+        ),
+        ". ",
+        "Stunning views of the sea, from your desk or from your balcony. ",
+        "Entertain guests on the building's panaoramic roof terraces. ",
+        "In the ",
+        a( href := "https://plus.google.com/101225362883468431775/about?gl=us&hl=en", target := "_blank" )(
+          "heart of the city "
+        ),
+        raw("next to Constan&#x163;a's "),
+        a( href := "http://www.ibis.com/gb/hotel-5939-ibis-constanta/index.shtml", target := "_blank" )(
+          "main business hotel"
+        ),
+        "."
+      );
+      def roContent = Seq[ scalatags.JsDom.Modifier ](
+        a( href := "http://ro.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), ". ",
+        raw("Spa&tcedil;ii comerciale, spa&tcedil;ii pentru birouri, &scedil;i " ),
+        a( href := AirBnBUrl, target := "_blank" )(
+          raw( "un calderos Studio pentru vacan&tcedil;a" )
+        ),
+        ". ",
+        raw( "O loca&tcedil;ie cu distinc&tcedil;ie, incarcata de "),
+        a( href := "http://www.nytimes.com/2001/02/15/garden/romanian-past-interrupted.html?pagewanted=all&src=pm", target := "_blank" )(
+          "istorie "
+        ),
+        a( href := "https://plus.google.com/101225362883468431775/about?gl=us&hl=en", target := "_blank" )(
+          raw( "in inima ora&scedil;ului" )
+        ),
+        raw( ", langa " ),
+        a( href := "http://www.ibis.com/gb/hotel-5939-ibis-constanta/index.shtml", target := "_blank" )(
+          "cel mai important business hotel din zona. "
+        ),
+        raw(
+          "Cu o privile&scedil;te uimitoare la Marea Neagra din orice birou sau balcon &scedil;i unde va pute&tcedil;i primi " +
+            "oaspe&tcedil;ii pe imensa terasa de la ultimul nivel de unde se poate admira cea mai cunoscuta plaja a ora&scedil;ului " +
+            "dar &scedil;i portul turistic Tomis."
+        )
+      )
 
       div( id := "home" ) (
         div( id := "circleWindowFrame" )(
@@ -167,7 +168,33 @@ object Html {
     }
 
     def gallery = ro.casaleon.www.gallery.Html.galleryPane 
-    def contact = div( id := "placeholder" )( p( b( "Contact: To come" ) ) )
+    def contact = {
+      def emailTable( headerAddresses : Seq[( String, String )] ) : TypedTag[dom.Element] = { 
+        def row( header : String, email : String ) = tr(
+          th( cls := "emailTableLeftHeader" )( header ),
+          td( cls := "emailTableEmailBox" )( a( href := s"mailto:${email}" )( email ) )
+        )
+
+        table( id := "emailTable" )(
+          for( ha <- headerAddresses ) yield row( ha._1, ha._2 )
+        )
+      }
+
+      def enContent = Seq[ scalatags.JsDom.Modifier ](
+        div( id := "contactCard" )(
+          "Please contact us anytime at the appropriate address below:",
+          emailTable(
+            Seq(
+              ("Building Administration", "administration@casaleon.ro" ),
+              ("Accounting", "accounting@casaleon.ro" ),
+              ("Legal", "legal@casaleon.ro" )
+            )
+          )
+        )
+      )
+
+      div( id := "placeholder" )( enContent )
+    }
 
     model.page match {
       case Page.Home    => home

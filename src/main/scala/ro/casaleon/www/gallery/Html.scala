@@ -102,7 +102,7 @@ object Html {
     if ( SsimManagedUrls ) {
       img( src := ( imgUrlStr + "?height=" + ImageHeight ) )
     } else {
-      img( src := imgUrlStr, width := ImageHeight )
+      img( src := imgUrlStr, height := ImageHeight )
     }
   }
 }
