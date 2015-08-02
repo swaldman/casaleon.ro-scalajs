@@ -56,10 +56,10 @@ object Html {
   }
 
   def content( model : Model ) : TypedTag[dom.Element] = {
-    def home = {
-      import I18n.Lang.RO
+    import I18n.Lang.RO
 
-      def enContent = Seq[ scalatags.JsDom.Modifier ](
+    def home = {
+     def enContent = Seq[ scalatags.JsDom.Modifier ](
         a( href := "http://en.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), ". ",
         "Commercial space, office space, and ",
         a( href := AirBnBUrl, target := "_blank" )(
@@ -121,8 +121,6 @@ object Html {
       )
     }
     def spaces = { 
-      import I18n.Lang.RO
-
       def enContent = Seq[ scalatags.JsDom.Modifier ](
         p(
           "Our third floor vacation studio, adjacent to a stunning rooftop terrace ",
@@ -171,7 +169,7 @@ object Html {
     def contact = {
       def emailTable( headerAddresses : Seq[( String, String )] ) : TypedTag[dom.Element] = { 
         def row( header : String, email : String ) = tr( cls := "emailTableRow")(
-          td( cls := "emailRowHeader" )( header ),
+          td( cls := "emailRowHeader" )( raw( header ) ),
           td( cls := "emailRowSeparator" )( raw("&rightsquigarrow;") ),
           td( cls := "emailRowAddress" )( a( href := s"mailto:${email}" )( email ) )
         )
@@ -182,6 +180,9 @@ object Html {
       }
 
       def enContent = Seq[ scalatags.JsDom.Modifier ](
+        div( id := "firmName" )(
+          "S.C. Casa Leon S.R.L."
+        ),
         emailTable(
           Seq(
             ("administration", "administration@casaleon.ro" ),
@@ -189,10 +190,29 @@ object Html {
             ("legal", "legal@casaleon.ro" )
           )
         ),
-        i("(in case of emergency, please phone RO +40 752 095816 or US +1 410 336-1408)")
+        i("(in case of emergency, please phone 0752 095816 or US +1 410 336-1408)")
       )
 
-      div( id := "contactCard" )( enContent )
+      def roContent = Seq[ scalatags.JsDom.Modifier ](
+        div( id := "firmName" )(
+          "S.C. Casa Leon S.R.L."
+        ),
+        emailTable(
+          Seq(
+            ("administra&tcedil;ie", "administratie@casaleon.ro" ),
+            ("contabilitate", "contabilitate@casaleon.ro" ),
+            ("avocat", "avocat@casaleon.ro" )
+          )
+        ),
+        i(raw("(in caz of urgen&tcedil;a, va rugam sa suna&tcedil;i 0752 095816 sau US +1 410 336-1408)"))
+      )
+
+      div( id := "contactCard" )( 
+        model.lang match {
+          case RO => roContent
+          case _  => enContent
+        }
+      )
     }
 
     model.page match {
