@@ -123,11 +123,22 @@ div#homeContent {
     /* border: 3px solid yellow; */
 }
 
-div#homeContent a {
+div#emailRows {
+    text-align: center;
+    line-height: 3em;
+    font-size: 18pt;
+    margin-top: 2em;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+div#homeContent a, table#emailTable td a {
     font-weight: bold;
     color: black;
     text-decoration: none;
 }
+
+
 
 .left {
     text-align: left;
@@ -201,7 +212,7 @@ div#content {
 
 div#contactCard {
     margin-top: 2em;
-    text-align: left;
+    text-align: center;
     margin-left: 10%;
     margin-right: 10%;
 }
@@ -215,23 +226,18 @@ table#emailTable {
     margin-top:   2em;
     margin-left:  auto;
     margin-right: auto;
+    margin-bottom: 1em;
 }
 
-table#emailTable th, table#emailTable td {
+table#emailTable td {
     font-size: 18pt;
     height: 48pt;
 }
 
-table#emailTable th {
+td.emailRowHeader {
     text-align: right;
-    padding-right: 0.5em;
+    font-style: italic;
 }
-
-table#emailTable td {
-    text-align: left;
-    padding-left: 0.5em;
-}
-
 
 .textcard {
     font-size:    18pt;

@@ -170,9 +170,10 @@ object Html {
     def gallery = ro.casaleon.www.gallery.Html.galleryPane 
     def contact = {
       def emailTable( headerAddresses : Seq[( String, String )] ) : TypedTag[dom.Element] = { 
-        def row( header : String, email : String ) = tr(
-          th( cls := "emailTableLeftHeader" )( header ),
-          td( cls := "emailTableEmailBox" )( a( href := s"mailto:${email}" )( email ) )
+        def row( header : String, email : String ) = tr( cls := "emailTableRow")(
+          td( cls := "emailRowHeader" )( header ),
+          td( cls := "emailRowSeparator" )( raw("&rightsquigarrow;") ),
+          td( cls := "emailRowAddress" )( a( href := s"mailto:${email}" )( email ) )
         )
 
         table( id := "emailTable" )(
@@ -181,19 +182,17 @@ object Html {
       }
 
       def enContent = Seq[ scalatags.JsDom.Modifier ](
-        div( id := "contactCard" )(
-          "Please contact us anytime at the appropriate address below:",
-          emailTable(
-            Seq(
-              ("Building Administration", "administration@casaleon.ro" ),
-              ("Accounting", "accounting@casaleon.ro" ),
-              ("Legal", "legal@casaleon.ro" )
-            )
+        emailTable(
+          Seq(
+            ("administration", "administration@casaleon.ro" ),
+            ("accounting", "accounting@casaleon.ro" ),
+            ("legal", "legal@casaleon.ro" )
           )
-        )
+        ),
+        i("(in case of emergency, please phone RO +40 752 095816 or US +1 410 336-1408)")
       )
 
-      div( id := "placeholder" )( enContent )
+      div( id := "contactCard" )( enContent )
     }
 
     model.page match {
