@@ -14,13 +14,14 @@ import I18n.Lang;
 object App extends JSApp {
 
   val BrowserLang = findBrowserLang;
+  val NoHashModel = Model( Page.Home, BrowserLang );
 
   private var model = recreateModel;
 
   def recreateModel : Model = {
     val hash = getHash();
     if (hash == null || hash.length == 0)
-      Model( Page.Home, BrowserLang )
+      NoHashModel
     else
       Model.fromUrlEncodedString( hash )
   }
@@ -38,6 +39,8 @@ object App extends JSApp {
   }
 
   def setHash( hash : String ) : Unit = HashManager.setHash( hash )
+
+  def clearHash() : Unit = HashManager.clearHash();
 
   private def findBrowserLang : Lang = {
     var check = LanguageFinder.findLanguage()
@@ -57,7 +60,13 @@ object App extends JSApp {
 
   def updateModel( model : Model ) : Unit = {
     this.model = model;
-    setHash( model.asUrlEncodedString );
+
+    if ( model == NoHashModel ) {
+      clearHash;
+    } else {
+      setHash( model.asUrlEncodedString );
+    }
+
     rerender;
   }
 
@@ -97,5 +106,6 @@ object App extends JSApp {
   private object HashManager extends js.GlobalScope {
     def getHash() : String = js.native;
     def setHash( hash : String, updateState : Boolean = true ) : Unit = js.native;
+    def clearHash() : Unit = js.native;
   }
 }

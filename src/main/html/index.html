@@ -23,6 +23,10 @@
           history.pushState( {}, "Casa Leon &mdash; Constan&#539;a Office Space", window.location )
         }
       }
+      function clearHash() {
+        // thanks Randomblue, http://stackoverflow.com/questions/15322917/clearing-url-hash
+        history.pushState({}, document.title, window.location.pathname);
+      }
       
       window.onpopstate=function( event ){ ro.casaleon.www.App().restart() }
     </script>
