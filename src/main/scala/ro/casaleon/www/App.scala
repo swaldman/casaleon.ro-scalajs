@@ -13,19 +13,35 @@ import I18n.Lang;
 @JSExport
 object App extends JSApp {
 
-  private var model = new Model( Page.Home, Lang.EN );
+  val BrowserLang = findBrowserLang;
 
-  // note that we had to define a findLanguage() function in Javascript,
-  // in the global scope of our host HTML document
-  object LanguageFinder extends js.GlobalScope {
-   def findLanguage() : String = js.native
+  private var model = recreateModel;
+
+  def recreateModel : Model = {
+    val hash = getHash();
+    if (hash == null || hash.length == 0)
+      Model( Page.Home, BrowserLang )
+    else
+      Model.fromUrlEncodedString( hash )
   }
+
+  def getHash() : String = {
+    def nullifyEmpty( str : String ) : String = if (str == null || str.length == 0) null else str
+
+    val raw = nullifyEmpty( HashManager.getHash() );
+    if (raw == null) {
+      null 
+    } else {
+      val rest = if (raw(0) == '#') raw.substring(1) else raw;
+      nullifyEmpty( rest )
+    }
+  }
+
+  def setHash( hash : String ) : Unit = HashManager.setHash( hash )
 
   private def findBrowserLang : Lang = {
     var check = LanguageFinder.findLanguage()
-    println( s"check: $check" )
     if ( check == null || check.length < 2 ) {
-      println( s"Bad value for check: ${check}" )
       "en"
     } else {
       check.substring(0,2)
@@ -41,13 +57,20 @@ object App extends JSApp {
 
   def updateModel( model : Model ) : Unit = {
     this.model = model;
-    rerender
+    setHash( model.asUrlEncodedString );
+    rerender;
   }
 
   @JSExport
   def main() : Unit = {
-    updateLang( findBrowserLang )
     rerender
+  }
+
+
+  @JSExport
+  def restart() : Unit = {
+    model = recreateModel;
+    rerender;
   }
 
   def updateLang( newLang : Lang ) : Unit = updateModel( model.copy( lang = newLang ) )
@@ -60,4 +83,19 @@ object App extends JSApp {
   @JSExport
   def updatePageName( name : String ) : Unit = Page( name ).foreach( updatePage )
 
+  // note that we had to define a findLanguage() function in Javascript,
+  // in the global scope of our host HTML document
+  private object LanguageFinder extends js.GlobalScope {
+    def findLanguage() : String = js.native
+  }
+  def parseUrlEncoded( str : String ) : scala.collection.Map[String,Array[String]] = UrlEncodedParser.parseUrlEncoded( str ).mapValues( _.toArray );
+  
+  private object UrlEncodedParser extends js.GlobalScope {
+    def parseUrlEncoded( str : String ) : js.Dictionary[ js.Array[String] ] = js.native;
+  }
+
+  private object HashManager extends js.GlobalScope {
+    def getHash() : String = js.native;
+    def setHash( hash : String, updateState : Boolean = true ) : Unit = js.native;
+  }
 }

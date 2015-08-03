@@ -8,6 +8,23 @@
         // thanks to Tim Babych on Stack Overflow http://stackoverflow.com/questions/1043339/javascript-for-detecting-browser-language-preference
         return navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage)
       }
+      function parseUrlEncoded( str ) { // returns a map to arrays
+        // modified from Qwerty in Stack Overflow http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+        var qd = {};
+        str.split("&").forEach(function(item) {var k = item.split("=")[0], v = item.split("=")[1]; v = v && decodeURIComponent(v); (k in qd) ? qd[k].push(v) : qd[k] = [v]});
+        return qd;
+      }
+      function getHash() {
+        return window.location.hash;
+      }
+      function setHash( str, updateState ) {
+        window.location.hash = str;
+        if ( updateState ) {
+          history.pushState( {}, "Casa Leon &mdash; Constan&#539;a Office Space", window.location )
+        }
+      }
+      
+      window.onpopstate=function( event ){ ro.casaleon.www.App().restart() }
     </script>
     <script src="@jsFileName@" type="text/javascript"></script>
   </head>
