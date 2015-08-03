@@ -201,7 +201,7 @@ object Html {
           Seq(
             ("administra&tcedil;ie", "administratie@casaleon.ro" ),
             ("contabilitate", "contabilitate@casaleon.ro" ),
-            ("avocat", "avocat@casaleon.ro" )
+            ("juridic", "juridic@casaleon.ro" )
           )
         ),
         i(raw("(in caz of urgen&tcedil;a, va rugam sa suna&tcedil;i 0752 095816 sau US +1 410 336-1408)"))
