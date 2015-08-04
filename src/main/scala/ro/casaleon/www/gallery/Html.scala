@@ -64,8 +64,11 @@ object Html {
           div( id := "previousImageLink" )( 
             mbPrevUrl.fold( a() )( prevUrl => a( onclick := ((_ : dom.Event) => Gallery.showViewer( prevUrl )) )( raw("&#8604;") ) )
           ),
+          div( id := "nextImageLink" )(
+            mbNextUrl.fold( a() )( nextUrl => a( onclick := ((_ : dom.Event) => Gallery.showViewer( nextUrl )) )( raw("&rightsquigarrow;") ) )
+          ),
           if ( mbImageAspectRatio != None ) { // this is the final aspect ratio
-            img( sizing, src := url )
+            img( id := "galleryImage", sizing, src := url )
           } else {
             val onLoadFcn = (evt : dom.Event) => { // check to see whether our aspect raio guess led to okay sizing
               val imgTag = evt.target.asInstanceOf[dom.raw.HTMLImageElement]
@@ -77,9 +80,6 @@ object Html {
             val onLoadAttr = onload := onLoadFcn
             img( sizing, src := url, onLoadAttr )
           },
-          div( id := "nextImageLink" )(
-            mbNextUrl.fold( a() )( nextUrl => a( onclick := ((_ : dom.Event) => Gallery.showViewer( nextUrl )) )( raw("&rightsquigarrow;") ) )
-          ),
           preloads // does not display
         )
       )
