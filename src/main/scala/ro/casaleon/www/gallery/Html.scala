@@ -28,7 +28,7 @@ object Html {
       case Some( ImageUrlInfo( url, mbAspectRatio ) ) => {
         div(
           imageViewer( url, mbAspectRatio ),
-          script( "document.getElementById('imageViewer').focus()" ) // this feels like a terrible hack.
+          script( "setTimeout( function() {document.getElementById('imageViewer').focus()}, 100 )" ) // this feels like a terrible hack.
         )
       }
       case None => galleryTableFrame
@@ -59,8 +59,6 @@ object Html {
     val keypressHandler = (e: dom.KeyboardEvent) => {
       import dom.ext.KeyCode
 
-      println( "keypressHandler, event: s{e}" );
-
       e.keyCode match {
         case KeyCode.Escape => Gallery.closeViewer
         case KeyCode.Left => mbPrevUrl.foreach( Gallery.showViewer( _ ) );
@@ -73,7 +71,7 @@ object Html {
       width := dim.width,
       height := dim.height,
       onkeydown := keypressHandler,
-      tabindex := 0
+      tabindex := 1
     ) {
       val sizing = if (fullWidth) (width := dim.width) else (height := availableHeight);
       Seq(
