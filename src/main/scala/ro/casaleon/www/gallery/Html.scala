@@ -25,8 +25,13 @@ object Html {
 
   def galleryContents( model : Model ) : TypedTag[dom.Element] = {
     model.selectedImageUrlInfo match {
-      case Some( ImageUrlInfo( url, mbAspectRatio ) ) => imageViewer( url, mbAspectRatio )
-      case None                                       => galleryTableFrame
+      case Some( ImageUrlInfo( url, mbAspectRatio ) ) => {
+        div(
+          imageViewer( url, mbAspectRatio ),
+          script( "document.getElementById('imageViewer').focus()" ) // this feels like a terrible hack.
+        )
+      }
+      case None => galleryTableFrame
     }
   }
 
@@ -51,7 +56,25 @@ object Html {
       mbPrevUrl.map( u => img( src := u, display := "none" ) ).toSeq ++ mbNextUrl.map( u => img( src := u, display := "none" ) ).toSeq
     );
 
-    div ( id := "imageViewer", width := dim.width, height := dim.height ){
+    val keypressHandler = (e: dom.KeyboardEvent) => {
+      import dom.ext.KeyCode
+
+      println( "keypressHandler, event: s{e}" );
+
+      e.keyCode match {
+        case KeyCode.Escape => Gallery.closeViewer
+        case KeyCode.Left => mbPrevUrl.foreach( Gallery.showViewer( _ ) );
+        case KeyCode.Right => mbNextUrl.foreach( Gallery.showViewer( _ ) );
+      }
+    }
+
+    div (
+      id := "imageViewer",
+      width := dim.width,
+      height := dim.height,
+      onkeydown := keypressHandler,
+      tabindex := 0
+    ) {
       val sizing = if (fullWidth) (width := dim.width) else (height := availableHeight);
       Seq(
         div( id := "imageViewerHeader" )(
@@ -61,7 +84,7 @@ object Html {
           img( src := ImageViewerHeaderImage )
         ),
         div( id := "imageViewerPanel" )(
-          div( id := "previousImageLink" )( 
+          div( id := "previousImageLink" )(
             mbPrevUrl.fold( a() )( prevUrl => a( onclick := ((_ : dom.Event) => Gallery.showViewer( prevUrl )) )( raw("&#8604;") ) )
           ),
           div( id := "nextImageLink" )(
