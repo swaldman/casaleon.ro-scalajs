@@ -29,6 +29,11 @@
       }
       
       window.onpopstate=function( event ){ ro.casaleon.www.App().restart() }
+
+      // workaround problem with iphone touchmove events not moving, get nonstandard top level pageX and pageY from touchend events
+      function topLevelPageX( touchendevent ) { return touchendevent.pageX; }
+      function topLevelPageY( touchendevent ) { return touchendevent.pageY; }
+
     </script>
     <script src="@jsFileName@" type="text/javascript"></script>
   </head>

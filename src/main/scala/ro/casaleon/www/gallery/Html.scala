@@ -56,13 +56,53 @@ object Html {
       mbPrevUrl.map( u => img( src := u, display := "none" ) ).toSeq ++ mbNextUrl.map( u => img( src := u, display := "none" ) ).toSeq
     );
 
-    val keypressHandler = (e: dom.KeyboardEvent) => {
+    val keypressHandler = (e : dom.KeyboardEvent) => {
       import dom.ext.KeyCode
 
       e.keyCode match {
         case KeyCode.Escape => Gallery.closeViewer
         case KeyCode.Left => mbPrevUrl.foreach( Gallery.showViewer( _ ) );
         case KeyCode.Right => mbNextUrl.foreach( Gallery.showViewer( _ ) );
+      }
+    }
+
+    var down : Option[dom.TouchEvent] = None;
+    var last : Option[dom.TouchEvent] = None;
+
+    val handleTouchStart = (e : dom.TouchEvent ) => {
+      //println("handleTouchStart");
+      //scala.scalajs.js.Dynamic.global.console.log( e );
+      down = Some( e );
+    }
+    val handleTouchMove = (e : dom.TouchEvent) => {
+      //println("handleTouchMove");
+      //scala.scalajs.js.Dynamic.global.console.log( e );
+      last = Some( e );
+    }
+    val handleTouchEnd = (e : dom.TouchEvent ) => {
+      //println("handleTouchEnd");
+      //scala.scalajs.js.Dynamic.global.console.log( e );
+
+      val _down = down;
+      val _last = last;
+
+      down = None;
+      last = None;
+
+      _down.foreach { d =>
+        _last.foreach { l =>
+          var xDiff = l.touches(0).pageX - d.touches(0).pageX;
+          var yDiff = l.touches(0).pageY - d.touches(0).pageY;
+          if (xDiff == 0 && yDiff == 0) { // workaround what I can't help but think is an iphone / ios bug, see package.scala
+            val forced = forceExtractTopLevelPageXY( e );
+            xDiff = forced._1 - d.touches(0).pageX;
+            yDiff = forced._2 - d.touches(0).pageY;
+          }
+          //println( s"xDiff: ${xDiff}; yDiff: ${yDiff}" );
+          if ( math.abs( xDiff ) > math.abs( yDiff ) ) { // horizontal-ish
+            if ( xDiff > 0 ) mbPrevUrl.foreach( Gallery.showViewer( _ ) ) else mbNextUrl.foreach( Gallery.showViewer( _ ) )
+          }
+        }
       }
     }
 
@@ -81,7 +121,7 @@ object Html {
           ),
           img( src := ImageViewerHeaderImage )
         ),
-        div( id := "imageViewerPanel" )(
+        div( id := "imageViewerPanel", "ontouchstart".attr := handleTouchStart, "ontouchmove".attr := handleTouchMove, "ontouchend".attr := handleTouchEnd )(
           div( id := "previousImageLink" )(
             mbPrevUrl.fold( a() )( prevUrl => a( onclick := ((_ : dom.Event) => Gallery.showViewer( prevUrl )) )( raw("&#8604;") ) )
           ),

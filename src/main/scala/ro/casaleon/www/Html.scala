@@ -85,9 +85,9 @@ object Html {
       );
       def roContent = Seq[ scalatags.JsDom.Modifier ](
         a( href := "http://ro.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), ". ",
-        raw("Spa&tcedil;ii comerciale, spa&tcedil;ii pentru birouri, &scedil;i " ),
+        raw("Spa&tcedil;ii comerciale, spa&tcedil;ii pentru birouri &scedil;i " ),
         a( href := AirBnBUrl, target := "_blank" )(
-          raw( "un calderos Studio pentru vacan&tcedil;a" )
+          raw( "un calduros Studio pentru vacan&tcedil;a" )
         ),
         ". ",
         raw( "O loca&tcedil;ie cu distinc&tcedil;ie, incarcata de "),
@@ -97,12 +97,12 @@ object Html {
         a( href := "https://plus.google.com/101225362883468431775/about?gl=us&hl=en", target := "_blank" )(
           raw( "in inima ora&scedil;ului" )
         ),
-        raw( ", langa " ),
+        raw( ", lang&#259; " ),
         a( href := "http://www.ibis.com/gb/hotel-5939-ibis-constanta/index.shtml", target := "_blank" )(
           "cel mai important business hotel din zona. "
         ),
         raw(
-          "Cu o privile&scedil;te uimitoare la Marea Neagra din orice birou sau balcon &scedil;i unde va pute&tcedil;i primi " +
+          "Cu o privile&scedil;te uimitoare la Marea Neagra din orice birou sau balcon, unde va pute&tcedil;i primi " +
             "oaspe&tcedil;ii pe imensa terasa de la ultimul nivel de unde se poate admira cea mai cunoscuta plaja a ora&scedil;ului " +
             "dar &scedil;i portul turistic Tomis."
         )
@@ -204,7 +204,7 @@ object Html {
             ("juridic", "juridic@casaleon.ro" )
           )
         ),
-        i(raw("(in caz of urgen&tcedil;a, va rugam sa suna&tcedil;i 0752 095816 sau US +1 410 336-1408)"))
+        i(raw("(&icirc;n caz de urgen&tcedil;a, va rugam sa suna&tcedil;i 0752 095816 sau US +1 410 336-1408)"))
       )
 
       div( id := "contactCard" )( 
