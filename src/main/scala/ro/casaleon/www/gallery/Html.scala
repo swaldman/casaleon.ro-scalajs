@@ -94,9 +94,9 @@ object Html {
 
       _down.foreach { d =>
         _last.foreach { l =>
-          var xDiff = l.touches(0).pageX - d.touches(0).pageX;
+          var xDiff = l.touches(0).pageX - d.touches(0).pageX; //this is probably not where we should be looking, top-level pageX, pageY seems better
           var yDiff = l.touches(0).pageY - d.touches(0).pageY;
-          if (xDiff == 0 && yDiff == 0) { // workaround what I can't help but think is an iphone / ios bug, see package.scala
+          if (xDiff == 0 && yDiff == 0) { // see package.scala
             val forced = forceExtractTopLevelPageXY( e );
             xDiff = forced._1 - d.touches(0).pageX;
             yDiff = forced._2 - d.touches(0).pageY;

@@ -22,6 +22,9 @@ package object gallery {
   //
   // but the stuff below works, as a workaround. it's used in Html.scala in
   // this package.
+  //
+  // it looks like the deal is that the touches coords don't change, but top-level 
+  // pageX, pageY properties do
 
   def forceExtractTopLevelPageXY( e : dom.TouchEvent ) : (Int, Int ) = {
     import IphonePageXYWorkaroundManager._
