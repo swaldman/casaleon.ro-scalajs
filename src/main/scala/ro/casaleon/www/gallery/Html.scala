@@ -72,16 +72,19 @@ object Html {
     val handleTouchStart = (e : dom.TouchEvent ) => {
       //println("handleTouchStart");
       //scala.scalajs.js.Dynamic.global.console.log( e );
+      e.preventDefault();
       down = Some( e );
     }
     val handleTouchMove = (e : dom.TouchEvent) => {
       //println("handleTouchMove");
       //scala.scalajs.js.Dynamic.global.console.log( e );
+      e.preventDefault();
       last = Some( e );
     }
     val handleTouchEnd = (e : dom.TouchEvent ) => {
       //println("handleTouchEnd");
       //scala.scalajs.js.Dynamic.global.console.log( e );
+      e.preventDefault();
 
       val _down = down;
       val _last = last;
@@ -99,8 +102,14 @@ object Html {
             yDiff = forced._2 - d.touches(0).pageY;
           }
           //println( s"xDiff: ${xDiff}; yDiff: ${yDiff}" );
-          if ( math.abs( xDiff ) > math.abs( yDiff ) ) { // horizontal-ish
+
+          val absSlope = math.abs( yDiff.toDouble / xDiff );
+          //println( s"absSlope: ${absSlope}; xDiff: ${xDiff}" );
+
+          if ( absSlope <= 1 ) { // horizontal-ish
             if ( xDiff > 0 ) mbPrevUrl.foreach( Gallery.showViewer( _ ) ) else mbNextUrl.foreach( Gallery.showViewer( _ ) )
+          } else if (absSlope > 1.5 ){ // arbitrary, seems a good balance of few spurious closes but not hard to escape
+            /* if ( yDiff > (dim.height/4) ) */ Gallery.closeViewer
           }
         }
       }
