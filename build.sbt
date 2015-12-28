@@ -39,7 +39,7 @@ assetsSourceDirectory := new File( mainSourceDirectory.value, "assets" )
 
 htmlSourceDirectory := new File( mainSourceDirectory.value, "html" ) 
 
-rsyncDeployDestination := "swaldman@tickle.mchange.com:/home/web/www.casaleon.ro"
+rsyncDeployDestination := "swaldman@tickle1.mchange.com:/home/web/public/www.casaleon.ro"
 
 rsyncDeploy := {
   import scala.sys.process._
