@@ -20,7 +20,7 @@ lazy val rsyncDeploy = taskKey[Unit]("Syncs the generated public_html directory 
 
 enablePlugins(ScalaJSPlugin)
 
-name := "casaleon.ro-play"
+name := "casaleon.ro-scalajs"
 
 version := "0.0.1-SNAPSHOT"
 
@@ -39,7 +39,7 @@ assetsSourceDirectory := new File( mainSourceDirectory.value, "assets" )
 
 htmlSourceDirectory := new File( mainSourceDirectory.value, "html" ) 
 
-rsyncDeployDestination := "swaldman@tickle1.mchange.com:/home/web/public/www.casaleon.ro"
+rsyncDeployDestination := "swaldman@tickle.mchange.com:/home/web/public/www.casaleon.ro"
 
 rsyncDeploy := {
   import scala.sys.process._
