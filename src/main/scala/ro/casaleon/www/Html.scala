@@ -60,14 +60,14 @@ object Html {
 
     def home = {
      def enContent = Seq[ scalatags.JsDom.Modifier ](
-        a( href := "http://en.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), ". ",
+        a( href := "https://en.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), ". ",
         "Commercial space, office space, and ",
         a( href := AirBnBUrl, target := "_blank" )(
           "a fine vacation studio"
         ),
         ". ",
         "An address with distinction, and a ",
-        a( href := "http://www.nytimes.com/2001/02/15/garden/romanian-past-interrupted.html?pagewanted=all&src=pm", target := "_blank" )(
+        a( href := "https://www.nytimes.com/2001/02/15/garden/romanian-past-interrupted.html?pagewanted=all&src=pm", target := "_blank" )(
           "history"
         ),
         ". ",
@@ -78,27 +78,27 @@ object Html {
           "heart of the city "
         ),
         raw("next to Constan&#x163;a's "),
-        a( href := "http://www.ibis.com/gb/hotel-5939-ibis-constanta/index.shtml", target := "_blank" )(
+        a( href := "https://www.ibis.com/gb/hotel-5939-ibis-constanta/index.shtml", target := "_blank" )(
           "main business hotel"
         ),
         "."
       );
       def roContent = Seq[ scalatags.JsDom.Modifier ](
-        a( href := "http://ro.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), ". ",
+        a( href := "https://ro.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), ". ",
         raw("Spa&tcedil;ii comerciale, spa&tcedil;ii pentru birouri &scedil;i " ),
         a( href := AirBnBUrl, target := "_blank" )(
           raw( "un calduros Studio pentru vacan&tcedil;a" )
         ),
         ". ",
         raw( "O loca&tcedil;ie cu distinc&tcedil;ie, incarcata de "),
-        a( href := "http://www.nytimes.com/2001/02/15/garden/romanian-past-interrupted.html?pagewanted=all&src=pm", target := "_blank" )(
+        a( href := "https://www.nytimes.com/2001/02/15/garden/romanian-past-interrupted.html?pagewanted=all&src=pm", target := "_blank" )(
           "istorie "
         ),
         a( href := "https://plus.google.com/101225362883468431775/about?gl=us&hl=en", target := "_blank" )(
           raw( "in inima ora&scedil;ului" )
         ),
         raw( ", lang&#259; " ),
-        a( href := "http://www.ibis.com/gb/hotel-5939-ibis-constanta/index.shtml", target := "_blank" )(
+        a( href := "https://www.ibis.com/gb/hotel-5939-ibis-constanta/index.shtml", target := "_blank" )(
           "cel mai important business hotel din zona. "
         ),
         raw(
