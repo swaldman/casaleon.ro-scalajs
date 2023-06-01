@@ -6,7 +6,7 @@ import scalatags.JsDom.TypedTag;
 import org.scalajs.dom;
 
 object Html {
-  val AirBnBUrl = "https://www.airbnb.com/rooms/6231211"
+  val BookingUrl = "https://www.booking.com/hotel/ro/casa-leon.html?aid=304142"
 
   def mainFrame( model : Model ) : TypedTag[dom.Element] = {
     div( id := "main" )(
@@ -44,7 +44,7 @@ object Html {
     }
     if ( model.page == Page.Home ) {
       div( id := "vacationRentalsStar" )(
-        a( href := AirBnBUrl, target := "_blank" )(
+        a( href := BookingUrl, target := "_blank" )(
           img( src := imgUrl, width := "75%" )
         )
       )
@@ -62,7 +62,7 @@ object Html {
      def enContent = Seq[ scalatags.JsDom.Modifier ](
         a( href := "https://en.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), ". ",
         "Commercial space, office space, and ",
-        a( href := AirBnBUrl, target := "_blank" )(
+        a( href := BookingUrl, target := "_blank" )(
           "a fine vacation studio"
         ),
         ". ",
@@ -78,7 +78,7 @@ object Html {
           "heart of the city "
         ),
         raw("next to Constan&#x163;a's "),
-        a( href := "https://www.ibis.com/gb/hotel-5939-ibis-constanta/index.shtml", target := "_blank" )(
+        a( href := "https://continental-forum-constanta.continentalhotels.ro/en", target := "_blank" )(
           "main business hotel"
         ),
         "."
@@ -86,7 +86,7 @@ object Html {
       def roContent = Seq[ scalatags.JsDom.Modifier ](
         a( href := "https://ro.wikipedia.org/wiki/Constanța", target := "_blank" )(raw("Constan&#x163;a, Romania")), ". ",
         raw("Spa&tcedil;ii comerciale, spa&tcedil;ii pentru birouri &scedil;i " ),
-        a( href := AirBnBUrl, target := "_blank" )(
+        a( href := BookingUrl, target := "_blank" )(
           raw( "un calduros Studio pentru vacan&tcedil;a" )
         ),
         ". ",
@@ -98,7 +98,7 @@ object Html {
           raw( "in inima ora&scedil;ului" )
         ),
         raw( ", lang&#259; " ),
-        a( href := "https://www.ibis.com/gb/hotel-5939-ibis-constanta/index.shtml", target := "_blank" )(
+        a( href := "https://continental-forum-constanta.continentalhotels.ro/en", target := "_blank" )(
           "cel mai important business hotel din zona. "
         ),
         raw(
@@ -124,10 +124,10 @@ object Html {
       def enContent = Seq[ scalatags.JsDom.Modifier ](
         p(
           "Our third floor vacation studio, adjacent to a stunning rooftop terrace ",
-          "is now available via AirBnB."
+          "is now available via booking.com."
         ),
         p( cls := "center" )(
-          a( href := AirBnBUrl, cls := "booknow", target := "_blank" )(
+          a( href := BookingUrl, cls := "booknow", target := "_blank" )(
             "Book now!"
           )
         ),
@@ -140,11 +140,11 @@ object Html {
         p(
           raw(
             "Studioul destinat vacan&tcedil;elor, situat langa terasa de 96 mp de la etajul " +
-            "al treilea al imobilului, se poate rezerva prin AirBnB."
+            "al treilea al imobilului, se poate rezerva prin booking.com."
           )
         ),
         p( cls := "center" )(
-          a( href := AirBnBUrl, cls := "booknow", target := "_blank" )(
+          a( href := BookingUrl, cls := "booknow", target := "_blank" )(
             "Rezerva acum!"
           )
         ),
